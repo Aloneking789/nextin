@@ -31,9 +31,9 @@ const App = () => {
     <NavigationContainer independent={true}>
       <Stack.Navigator initialRouteName="Home">
         {/* <Stack.Screen name="Login" component={LoginScreen} /> */}
-        <Stack.Screen name="Login" component={LoginScreen} />
-        <Stack.Screen name="Verify" component={VerifyOTPScreen} />
-        <Stack.Screen name="HomeScreen" component={HomeScreen} />
+        <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }}/>
+        <Stack.Screen name="Verify" component={VerifyOTPScreen} options={{ headerShown: false }}/>
+        <Stack.Screen name="HomeScreen" component={HomeScreen} options={{ headerShown: false }}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
