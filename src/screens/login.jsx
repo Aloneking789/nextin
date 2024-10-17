@@ -15,9 +15,8 @@ export const LoginScreen = ({ route, navigation }) => {
   const [mobileNumber, setMobileNumber] = useState("");
   const language = route.params["selectedLanguage"]["name"];
 
-  const isHindi = language === "Hindi"; // Check if the selected language is Hindi
+  const isHindi = language === "Hindi"; 
 
-  // Define translations for both languages
   const translations = {
     title: isHindi ? "स्वागत है! उपयोगकर्ता" : "Welcome! User",
     subtitle: isHindi
@@ -80,7 +79,6 @@ export const LoginScreen = ({ route, navigation }) => {
       <Text style={styles.subtitle}>Sign up or Login to your Account</Text>
 >>>>>>> origin/main
 
-      {/* Toggle Buttons for Login/Sign Up */}
       <View style={styles.toggleContainer}>
         <TouchableOpacity style={styles.toggleButtonActive}>
           <Text style={styles.toggleButtonTextActive}>
