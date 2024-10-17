@@ -147,19 +147,19 @@ export const HomeScreen = ({ navigation }) => {
       {/* Bottom Navigation */}
       <View style={styles.bottomNav}>
         <TouchableOpacity style={styles.navItem}>
-          <Icon name="home" size={24} color="#FF4500" />
+          <Icon name="home" size={22} color="#FF4500" />
           <Text style={[styles.navText, { color: '#FF4500' }]}>Home</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.navItem}>
-          <Icon name="search" size={24} color="#666" />
-          <Text style={styles.navText}>Search Services</Text>
+          <Icon name="search" size={22} color="#666" />
+          <Text style={styles.navText}>Search  </Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.navItem}>
-          <Icon name="cart" size={25} color="#666" />
+          <Icon name="cart" size={22} color="#666" />
           <Text style={styles.navText}>Cart</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.navItem}>
-          <Icon name="person" size={24} color="#666" />
+          <Icon name="person" size={22} color="#666" />
           <Text style={styles.navText}>Profile</Text>
         </TouchableOpacity>
       </View>
@@ -307,13 +307,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     backgroundColor: '#E0E0E0',
-    paddingVertical: 10,
+    paddingVertical: 9,
   },
   navItem: {
     alignItems: 'center',
+    marginRight: 5,
   },
   navText: {
-    fontSize: 12,
+    fontSize: 10,
     color: '#666',
     marginTop: 5,
   },
