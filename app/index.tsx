@@ -23,6 +23,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { VerifyOTPScreen } from '../src/screens/verifyOTP';
 import { HomeScreen } from '../src/screens/HomeScreen';
+import  LanguageSelection from '../src/screens/LanguageSelection'
 const Stack = createNativeStackNavigator();
 const App = () => {
   
@@ -31,6 +32,7 @@ const App = () => {
     <NavigationContainer independent={true}>
       <Stack.Navigator initialRouteName="Home">
         {/* <Stack.Screen name="Login" component={LoginScreen} /> */}
+        <Stack.Screen name="Lang" component={LanguageSelection} options={{ headerShown: false }}/>
         <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }}/>
         <Stack.Screen name="Verify" component={VerifyOTPScreen} options={{ headerShown: false }}/>
         <Stack.Screen name="HomeScreen" component={HomeScreen} options={{ headerShown: false }}/>
