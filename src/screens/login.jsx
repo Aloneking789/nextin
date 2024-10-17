@@ -44,6 +44,10 @@ export const LoginScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
+      <Image
+        source={require('../../assets/images/logo.png')} // Local image
+        style={styles.logo} // Add styling for the image
+      />
       <Text style={styles.title}>Welcome! User</Text>
       <Text style={styles.subtitle}>Sign up or Login to your Account</Text>
 
@@ -152,22 +156,32 @@ const styles = StyleSheet.create({
     borderRadius: 25, // Again, half of the width/height of the image for circular shape
   },
   container: {
+    justifyContent: "center",
+    // textAlign: "center",
+    // alignItems: "center",
     flex: 1,
-    justifyContent: "left",
+    // justifyContent: "left",
     padding: 20,
     backgroundColor: "#fff",
+  },
+  logo : {
+    width: 60,
+    height: 60,
+    borderRadius: 50,
+    alignSelf: "center",
+    marginBottom: 20,
   },
   title: {
     fontSize: 32,
     fontWeight: "bold",
     color: "#333",
-    textAlign: "left",
+    textAlign: "center",
     marginBottom: 5,
   },
   subtitle: {
     fontSize: 16,
     color: "#666",
-    textAlign: "left",
+    textAlign: "center",
     marginBottom: 20,
   },
   toggleContainer: {
@@ -238,11 +252,13 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginBottom: 20,
+    // textAlign: "center",
   },
   serviceProviderButtonText: {
     color: "#fff",
     fontSize: 18,
     fontWeight: "bold",
+    textAlign: "right",
   },
   sendOtpButton: {
     backgroundColor: "#87cefa",
@@ -250,9 +266,11 @@ const styles = StyleSheet.create({
     height: 60,
     justifyContent: "center",
     alignItems: "center",
+    // textAlign: "center",
   },
   sendOtpButtonText: {
     color: "#fff",
     fontSize: 24,
+    textAlign: "center",
   },
 });
