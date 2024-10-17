@@ -11,16 +11,40 @@ import {
   Alert,
 } from "react-native";
 
-export const LoginScreen = ({ navigation }) => {
+export const LoginScreen = ({ route, navigation }) => {
   const [mobileNumber, setMobileNumber] = useState("");
+  const language = route.params["selectedLanguage"]["name"];
+
+  const isHindi = language === "Hindi"; // Check if the selected language is Hindi
+
+  // Define translations for both languages
+  const translations = {
+    title: isHindi ? "स्वागत है! उपयोगकर्ता" : "Welcome! User",
+    subtitle: isHindi
+      ? "अपने खाते में साइन अप या लॉगिन करें"
+      : "Sign up or Login to your Account",
+    nameLabel: isHindi ? "आपका नाम" : "Your Name",
+    phoneLabel: isHindi ? "फोन नंबर" : "Phone no.",
+    loginButton: isHindi ? "लॉगिन" : "Login",
+    signUpButton: isHindi ? "साइन अप" : "Sign Up",
+    socialLoginText: isHindi ? "या उपयोग करके लॉगिन करें:" : "Or Login Using:",
+    serviceProviderLogin: isHindi
+      ? "सेवा प्रदाता के रूप में लॉगिन करें"
+      : "Login as Service Provider",
+    sendOtpButton: isHindi ? "ओटीपी भेजें" : "Send OTP",
+    invalidNumberAlert: isHindi
+      ? "कृपया एक मान्य 10-अंकीय मोबाइल नंबर दर्ज करें।"
+      : "Please enter a valid 10-digit mobile number.",
+    loginFailedAlert: isHindi ? "लॉगिन विफल" : "Login Failed",
+    loginError: isHindi
+      ? "लॉगिन के दौरान एक त्रुटि उत्पन्न हुई।"
+      : "An error occurred while logging in.",
+  };
 
   const handleLogin = async () => {
     console.log("button clicked");
     if (mobileNumber.length !== 10) {
-      Alert.alert(
-        "Invalid Number",
-        "Please enter a valid 10-digit mobile number."
-      );
+      Alert.alert("Invalid Number", translations.invalidNumberAlert);
       return;
     }
 
@@ -36,7 +60,7 @@ export const LoginScreen = ({ navigation }) => {
       navigation.navigate("Verify", { phoneNumber: `+91${mobileNumber}` });
     } catch (e) {
       console.error("Error logging in:", e);
-      Alert.alert("Login Failed", "An error occurred while logging in.");
+      Alert.alert(translations.loginFailedAlert, translations.loginError);
     }
 
     console.log("after the login attempt");
@@ -44,56 +68,37 @@ export const LoginScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Welcome! User</Text>
-      <Text style={styles.subtitle}>Sign up or Login to your Account</Text>
+      <Text style={styles.title}>{translations.title}</Text>
+      <Text style={styles.subtitle}>{translations.subtitle}</Text>
 
       {/* Toggle Buttons for Login/Sign Up */}
       <View style={styles.toggleContainer}>
         <TouchableOpacity style={styles.toggleButtonActive}>
-          <Text style={styles.toggleButtonTextActive}>Login</Text>
+          <Text style={styles.toggleButtonTextActive}>
+            {translations.loginButton}
+          </Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.toggleButtonInactive}>
-          <Text style={styles.toggleButtonTextInactive}>Sign Up</Text>
+          <Text style={styles.toggleButtonTextInactive}>
+            {translations.signUpButton}
+          </Text>
         </TouchableOpacity>
       </View>
 
       {/* Mobile Number Input */}
-      <Text
-        style={{
-          fontSize: 16,
-          fontWeight: "bold",
-          marginBottom: 10,
-        }}
-      >
-        Your Name
-      </Text>
+      <Text style={styles.inputLabel}>{translations.nameLabel}</Text>
+      <TextInput style={styles.input} placeholder={translations.nameLabel} />
+
+      <Text style={styles.inputLabel}>{translations.phoneLabel}</Text>
       <TextInput
         style={styles.input}
-        placeholder="Enter your name"
-      />
-      <Text
-        style={{
-          fontSize: 16,
-          fontWeight: "bold",
-          marginBottom: 10,
-        }}
-      >
-        Phone no.
-      </Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Enter your Phone No."
+        placeholder={translations.phoneLabel}
         keyboardType="phone-pad"
         maxLength={10}
         value={mobileNumber}
-        onChangeText={(value) => {
-          setMobileNumber(value);
-        }}
+        onChangeText={(value) => setMobileNumber(value)}
       />
-      {/* 
-      <TouchableOpacity>
-        <Text style={styles.forgotText}>Forgot Password?</Text>
-      </TouchableOpacity> */}
+
       <View
         style={{
           borderBottomColor: "black",
@@ -104,7 +109,7 @@ export const LoginScreen = ({ navigation }) => {
         }}
       />
       {/* Social Login */}
-      <Text style={styles.socialLoginText}>Or Login Using:</Text>
+      <Text style={styles.socialLoginText}>{translations.socialLoginText}</Text>
       <View style={styles.socialIconsContainer}>
         <TouchableOpacity style={styles.circularButton}>
           <Image
@@ -123,13 +128,15 @@ export const LoginScreen = ({ navigation }) => {
       {/* Login as Service Provider Button */}
       <TouchableOpacity style={styles.serviceProviderButton}>
         <Text style={styles.serviceProviderButtonText}>
-          Login as Service Provider
+          {translations.serviceProviderLogin}
         </Text>
       </TouchableOpacity>
 
       {/* Send OTP Button */}
       <TouchableOpacity style={styles.sendOtpButton} onPress={handleLogin}>
-        <Text style={styles.sendOtpButtonText}>Send OTP</Text>
+        <Text style={styles.sendOtpButtonText}>
+          {translations.sendOtpButton}
+        </Text>
       </TouchableOpacity>
     </View>
   );
@@ -141,10 +148,10 @@ const styles = StyleSheet.create({
     width: 60, // Width and height should be equal to make it a circle
     height: 60,
     borderRadius: 30, // Half of the width/height to make it circular
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     borderWidth: 2, // Border thickness
-    borderColor: '#ddd', // Border color
+    borderColor: "#ddd", // Border color
   },
   circularImage: {
     width: 50, // Image size
@@ -153,6 +160,7 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
+    marginTop : 5,
     justifyContent: "left",
     padding: 20,
     backgroundColor: "#fff",
@@ -162,6 +170,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "#333",
     textAlign: "left",
+    marginTop : 10,
     marginBottom: 5,
   },
   subtitle: {
@@ -207,10 +216,10 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     backgroundColor: "#f7f7f7",
   },
-  forgotText: {
-    textAlign: "right",
-    color: "#007bff",
-    marginBottom: 20,
+  inputLabel: {
+    fontSize: 16,
+    fontWeight: "bold",
+    marginBottom: 10,
   },
   socialLoginText: {
     textAlign: "center",
@@ -221,15 +230,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     marginBottom: 20,
-  },
-  socialIcon: {
-    width: 50,
-    height: 50,
-    backgroundColor: "#eee",
-    borderRadius: 25,
-    justifyContent: "center",
-    alignItems: "center",
-    marginHorizontal: 10,
   },
   serviceProviderButton: {
     backgroundColor: "#F4739E",
