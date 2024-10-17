@@ -15,8 +15,9 @@ export const LoginScreen = ({ route, navigation }) => {
   const [mobileNumber, setMobileNumber] = useState("");
   const language = route.params["selectedLanguage"]["name"];
 
-  const isHindi = language === "Hindi"; 
+  const isHindi = language === "Hindi"; // Check if the selected language is Hindi
 
+  // Define translations for both languages
   const translations = {
     title: isHindi ? "स्वागत है! उपयोगकर्ता" : "Welcome! User",
     subtitle: isHindi
@@ -67,18 +68,14 @@ export const LoginScreen = ({ route, navigation }) => {
 
   return (
     <View style={styles.container}>
-<<<<<<< HEAD
-      <Text style={styles.title}>{translations.title}</Text>
-      <Text style={styles.subtitle}>{translations.subtitle}</Text>
-=======
       <Image
         source={require('../../assets/images/logo.png')} // Local image
         style={styles.logo} // Add styling for the image
       />
       <Text style={styles.title}>Welcome! User</Text>
       <Text style={styles.subtitle}>Sign up or Login to your Account</Text>
->>>>>>> origin/main
 
+      {/* Toggle Buttons for Login/Sign Up */}
       <View style={styles.toggleContainer}>
         <TouchableOpacity style={styles.toggleButtonActive}>
           <Text style={styles.toggleButtonTextActive}>
@@ -170,12 +167,8 @@ const styles = StyleSheet.create({
     // textAlign: "center",
     // alignItems: "center",
     flex: 1,
-<<<<<<< HEAD
     marginTop : 5,
     justifyContent: "left",
-=======
-    // justifyContent: "left",
->>>>>>> origin/main
     padding: 20,
     backgroundColor: "#fff",
   },
@@ -190,12 +183,7 @@ const styles = StyleSheet.create({
     fontSize: 32,
     fontWeight: "bold",
     color: "#333",
-<<<<<<< HEAD
-    textAlign: "left",
-    marginTop : 10,
-=======
     textAlign: "center",
->>>>>>> origin/main
     marginBottom: 5,
   },
   subtitle: {
